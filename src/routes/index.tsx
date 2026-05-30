@@ -174,33 +174,41 @@ function Index() {
             <span className="steam ml-3" style={{ animationDelay: "1.2s" }} />
             <span className="steam ml-6" style={{ animationDelay: "2.4s" }} />
           </div>
+          {/* Rotating stamp */}
+          <div className="pointer-events-none absolute right-8 top-28 hidden lg:block">
+            <svg viewBox="0 0 200 200" className="spin-slow h-32 w-32 text-[var(--cream)]/70">
+              <defs>
+                <path id="circle" d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0" />
+              </defs>
+              <text fill="currentColor" fontSize="13" letterSpacing="4">
+                <textPath href="#circle">SPECIALTY · ODESA · SINCE 2020 · </textPath>
+              </text>
+              <circle cx="100" cy="100" r="6" fill="currentColor" />
+            </svg>
+          </div>
         </div>
 
         <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-6 pb-20 pt-32 lg:px-12">
           <div className="max-w-2xl">
             <Reveal variant="up" className="mb-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-[var(--cream)]/20 bg-[var(--cream)]/5 px-3 py-1 text-xs uppercase tracking-[0.2em] backdrop-blur">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--cream)]" /> Одеса · Молдаванка
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" /> Одеса · Приморский район
               </div>
             </Reveal>
-            <Reveal variant="blur" delay={120}>
-              <h1 className="font-display text-[clamp(3.5rem,11vw,9rem)] font-semibold leading-[0.9] tracking-tighter">
-                Hate<br />Coffee<span className="text-[var(--cream)]/40">.</span>
-              </h1>
-            </Reveal>
+            <h1 className="font-display text-[clamp(3.5rem,11vw,9rem)] font-semibold leading-[0.9] tracking-tighter">
+              <SplitText text="Hate" className="block" />
+              <SplitText text="Coffee." className="block" />
+            </h1>
             <Reveal variant="up" delay={350}>
               <p className="mt-8 max-w-md text-lg text-[var(--cream)]/80 md:text-xl">
-                Лучший кофе на Молдаванке. Имя звучит грубо — кофе звучит идеально.
+                Лучший кофе в Приморском районе. Имя звучит грубо — кофе звучит идеально.
               </p>
             </Reveal>
             <Reveal variant="up" delay={500} className="mt-10 flex flex-wrap items-center gap-4">
-              <a
-                href="#menu"
-                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-[var(--cream)] px-7 py-4 text-sm font-semibold text-[var(--espresso)] transition hover:scale-[1.03] hover:bg-white active:scale-100"
-              >
+              <MagneticButton href="#menu" className="shine group inline-flex items-center gap-3 rounded-full bg-[var(--cream)] px-7 py-4 text-sm font-semibold text-[var(--espresso)] hover:bg-white">
                 <span className="relative z-10">Посмотреть меню</span>
-                <span className="transition group-hover:translate-x-1">→</span>
-              </a>
+                <span className="relative z-10 transition group-hover:translate-x-1">→</span>
+              </MagneticButton>
               <a
                 href="#visit"
                 className="inline-flex items-center gap-2 px-2 py-4 text-sm font-medium text-[var(--cream)]/80 hover:text-[var(--cream)]"
