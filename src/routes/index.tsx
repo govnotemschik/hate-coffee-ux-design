@@ -276,7 +276,7 @@ function Index() {
               <h2 className="mt-4 font-display text-5xl font-semibold leading-tight md:text-6xl">
                 Любимое место района.
               </h2>
-              <div className="mt-10 rounded-2xl bg-[var(--espresso)] p-8 text-[var(--cream)] transition hover:-translate-y-1 hover:shadow-2xl">
+              <TiltCard className="mt-10 rounded-2xl bg-[var(--espresso)] p-8 text-[var(--cream)] shadow-xl">
                 <div className="font-display text-7xl font-semibold">
                   <CountUp to={5} decimals={1} />
                 </div>
@@ -284,7 +284,7 @@ function Index() {
                 <div className="mt-4 text-sm text-[var(--cream)]/70">
                   Средняя оценка по <CountUp to={23} /> проверенным отзывам в Google.
                 </div>
-              </div>
+              </TiltCard>
             </Reveal>
 
             <Reveal variant="stagger" className="grid gap-5 sm:grid-cols-2">
