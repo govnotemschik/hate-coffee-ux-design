@@ -6,15 +6,17 @@ import menuHotdog from "@/assets/menu-hotdog.jpg";
 import menuPastry from "@/assets/menu-pastry.jpg";
 import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
+import { MagneticButton } from "@/components/MagneticButton";
+import { TiltCard } from "@/components/TiltCard";
 import { useParallax, useScrollProgress } from "@/hooks/use-reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Hate Coffee — Лучший кофе на Молдаванке, Одеса" },
+      { title: "Hate Coffee — Лучший кофе в Приморском районе, Одеса" },
       { name: "description", content: "Спешелти кофейня на Пішонівській, 27. Свежая обжарка, альтернативное молоко, десерты и легендарные хот-доги. Рейтинг 5.0 ★ на Google." },
       { property: "og:title", content: "Hate Coffee — Одеса" },
-      { property: "og:description", content: "Лучший кофе на Молдаванке. Спешелти, десерты, хот-доги." },
+      { property: "og:description", content: "Лучший кофе в Приморском районе. Спешелти, десерты, хот-доги." },
       { property: "og:image", content: heroBarista },
     ],
     links: [
@@ -63,8 +65,32 @@ const schedule = [
 
 const marqueeWords = [
   "Спешелти", "★", "Свежая обжарка", "★", "Овсяное молоко", "★",
-  "V60", "★", "Хот-доги", "★", "Молдаванка", "★", "07:00 — 21:30", "★",
+  "V60", "★", "Хот-доги", "★", "Приморский район", "★", "07:00 — 21:30", "★",
 ];
+
+const INSTAGRAM_URL = "https://instagram.com/hate_coffee_01";
+
+function SplitText({ text, className = "" }: { text: string; className?: string }) {
+  return (
+    <span className={className} aria-label={text}>
+      {text.split("").map((c, i) => (
+        <span key={i} className="char" style={{ animationDelay: `${i * 0.04}s` }} aria-hidden>
+          {c === " " ? "\u00A0" : c}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function InstagramIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
 
 function Index() {
   const { ref: heroRef, offset } = useParallax<HTMLImageElement>(0.25);
