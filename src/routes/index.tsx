@@ -104,6 +104,17 @@ function Index() {
         aria-hidden
       />
 
+      {/* Floating IG badge */}
+      <a
+        href={INSTAGRAM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-[var(--espresso)] py-3 pl-4 pr-5 text-sm font-medium text-[var(--cream)] shadow-2xl ring-1 ring-[var(--cream)]/10 transition hover:scale-105 hover:bg-[var(--roast)]"
+      >
+        <InstagramIcon className="h-5 w-5 transition group-hover:rotate-12" />
+        <span className="hidden sm:inline">@hate_coffee_01</span>
+      </a>
+
       {/* NAV */}
       <header className="absolute top-0 left-0 right-0 z-20">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-12">
