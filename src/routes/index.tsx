@@ -122,17 +122,35 @@ function Index() {
             Hate<span className="opacity-60">.</span>Coffee
           </a>
           <nav className="hidden gap-8 text-sm font-medium text-[var(--cream)]/80 md:flex">
-            <a href="#menu" className="hover:text-[var(--cream)]">Меню</a>
-            <a href="#about" className="hover:text-[var(--cream)]">О нас</a>
-            <a href="#reviews" className="hover:text-[var(--cream)]">Отзывы</a>
-            <a href="#visit" className="hover:text-[var(--cream)]">Контакты</a>
+            {[
+              { href: "#menu", label: "Меню" },
+              { href: "#about", label: "О нас" },
+              { href: "#reviews", label: "Отзывы" },
+              { href: "#visit", label: "Контакты" },
+            ].map((l) => (
+              <a key={l.href} href={l.href} className="group relative hover:text-[var(--cream)]">
+                {l.label}
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-[var(--cream)] transition-all duration-500 group-hover:w-full" />
+              </a>
+            ))}
           </nav>
-          <a
-            href="#visit"
-            className="hidden rounded-full border border-[var(--cream)]/30 px-4 py-2 text-sm text-[var(--cream)] transition hover:bg-[var(--cream)] hover:text-[var(--espresso)] md:inline-block"
-          >
-            068 280 29 94
-          </a>
+          <div className="hidden items-center gap-3 md:flex">
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="rounded-full border border-[var(--cream)]/30 p-2 text-[var(--cream)] transition hover:bg-[var(--cream)] hover:text-[var(--espresso)]"
+            >
+              <InstagramIcon className="h-4 w-4" />
+            </a>
+            <a
+              href="tel:+380682802994"
+              className="rounded-full border border-[var(--cream)]/30 px-4 py-2 text-sm text-[var(--cream)] transition hover:bg-[var(--cream)] hover:text-[var(--espresso)]"
+            >
+              068 280 29 94
+            </a>
+          </div>
         </div>
       </header>
 
