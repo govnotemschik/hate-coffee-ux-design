@@ -346,7 +346,7 @@ function Index() {
 
           <Reveal variant="stagger" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {menu.map((m) => (
-              <article key={m.name} className="group cursor-pointer">
+              <TiltCard key={m.name} max={6} className="group cursor-pointer">
                 <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-[var(--sand)]">
                   <img
                     src={m.img}
@@ -362,8 +362,27 @@ function Index() {
                   <span className="text-sm font-medium text-[var(--roast)]">{m.price}</span>
                 </div>
                 <p className="mt-1 text-sm text-muted-foreground">{m.desc}</p>
-              </article>
+              </TiltCard>
             ))}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* PULL QUOTE */}
+      <section className="relative overflow-hidden bg-[var(--sand)] py-28 lg:py-40">
+        <div className="grain absolute inset-0" />
+        <div className="relative mx-auto max-w-5xl px-6 text-center lg:px-12">
+          <Reveal variant="blur">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Манифест</p>
+            <blockquote className="mt-8 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-[var(--espresso)] md:text-6xl lg:text-7xl">
+              Мы ненавидим плохой кофе.<br />
+              <span className="italic text-[var(--roast)]">Поэтому варим только лучший.</span>
+            </blockquote>
+            <div className="mt-10 inline-flex items-center gap-3 text-sm text-muted-foreground">
+              <span className="h-px w-12 bg-[var(--roast)]/40" />
+              Команда Hate Coffee
+              <span className="h-px w-12 bg-[var(--roast)]/40" />
+            </div>
           </Reveal>
         </div>
       </section>
