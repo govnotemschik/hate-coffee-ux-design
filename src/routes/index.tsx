@@ -426,6 +426,24 @@ function Index() {
                   </dd>
                 </div>
               </dl>
+
+              <div className="mt-10 flex flex-wrap gap-3">
+                <MagneticButton
+                  href={INSTAGRAM_URL}
+                  className="shine inline-flex items-center gap-2 rounded-full bg-[var(--cream)] px-5 py-3 text-sm font-semibold text-[var(--espresso)] hover:bg-white"
+                >
+                  <InstagramIcon className="h-4 w-4" />
+                  @hate_coffee_01
+                </MagneticButton>
+                <a
+                  href="https://maps.google.com/?q=Пішонівська+27+Одеса"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--cream)]/30 px-5 py-3 text-sm font-medium text-[var(--cream)] transition hover:bg-[var(--cream)]/10"
+                >
+                  Маршрут в Google Maps →
+                </a>
+              </div>
             </Reveal>
 
             <Reveal variant="zoom" className="relative min-h-[400px] overflow-hidden rounded-3xl border border-[var(--cream)]/10">
