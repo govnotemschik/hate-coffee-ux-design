@@ -430,6 +430,8 @@ function Index() {
               <div className="mt-10 flex flex-wrap gap-3">
                 <MagneticButton
                   href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="shine inline-flex items-center gap-2 rounded-full bg-[var(--cream)] px-5 py-3 text-sm font-semibold text-[var(--espresso)] hover:bg-white"
                 >
                   <InstagramIcon className="h-4 w-4" />
