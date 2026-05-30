@@ -248,6 +248,25 @@ function Index() {
         </div>
       </div>
 
+      {/* BIG STATS */}
+      <section className="relative overflow-hidden bg-[var(--sand)] py-20">
+        <div className="grain absolute inset-0" />
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-6 sm:grid-cols-3 lg:px-12">
+          {[
+            { n: 5, dec: 1, suf: " ★", label: "рейтинг Google" },
+            { n: 12000, dec: 0, suf: "+", label: "чашек в год" },
+            { n: 4, dec: 0, suf: " года", label: "на районе" },
+          ].map((s, i) => (
+            <Reveal key={i} variant="up" delay={i * 120} className="text-center">
+              <div className="font-display text-6xl font-semibold tracking-tight text-[var(--espresso)] md:text-7xl">
+                <CountUp to={s.n} decimals={s.dec} suffix={s.suf} />
+              </div>
+              <div className="mt-3 text-xs uppercase tracking-[0.25em] text-muted-foreground">{s.label}</div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* SOCIAL PROOF */}
       <section id="reviews" className="border-b border-border bg-background py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
