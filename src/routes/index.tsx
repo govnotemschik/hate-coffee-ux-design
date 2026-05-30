@@ -6,15 +6,17 @@ import menuHotdog from "@/assets/menu-hotdog.jpg";
 import menuPastry from "@/assets/menu-pastry.jpg";
 import { Reveal } from "@/components/Reveal";
 import { CountUp } from "@/components/CountUp";
+import { MagneticButton } from "@/components/MagneticButton";
+import { TiltCard } from "@/components/TiltCard";
 import { useParallax, useScrollProgress } from "@/hooks/use-reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Hate Coffee — Лучший кофе на Молдаванке, Одеса" },
+      { title: "Hate Coffee — Лучший кофе в Приморском районе, Одеса" },
       { name: "description", content: "Спешелти кофейня на Пішонівській, 27. Свежая обжарка, альтернативное молоко, десерты и легендарные хот-доги. Рейтинг 5.0 ★ на Google." },
       { property: "og:title", content: "Hate Coffee — Одеса" },
-      { property: "og:description", content: "Лучший кофе на Молдаванке. Спешелти, десерты, хот-доги." },
+      { property: "og:description", content: "Лучший кофе в Приморском районе. Спешелти, десерты, хот-доги." },
       { property: "og:image", content: heroBarista },
     ],
     links: [
@@ -63,8 +65,32 @@ const schedule = [
 
 const marqueeWords = [
   "Спешелти", "★", "Свежая обжарка", "★", "Овсяное молоко", "★",
-  "V60", "★", "Хот-доги", "★", "Молдаванка", "★", "07:00 — 21:30", "★",
+  "V60", "★", "Хот-доги", "★", "Приморский район", "★", "07:00 — 21:30", "★",
 ];
+
+const INSTAGRAM_URL = "https://instagram.com/hate_coffee_01";
+
+function SplitText({ text, className = "" }: { text: string; className?: string }) {
+  return (
+    <span className={className} aria-label={text}>
+      {text.split("").map((c, i) => (
+        <span key={i} className="char" style={{ animationDelay: `${i * 0.04}s` }} aria-hidden>
+          {c === " " ? "\u00A0" : c}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function InstagramIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
 
 function Index() {
   const { ref: heroRef, offset } = useParallax<HTMLImageElement>(0.25);
@@ -78,6 +104,17 @@ function Index() {
         aria-hidden
       />
 
+      {/* Floating IG badge */}
+      <a
+        href={INSTAGRAM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group fixed bottom-6 right-6 z-40 flex items-center gap-2 rounded-full bg-[var(--espresso)] py-3 pl-4 pr-5 text-sm font-medium text-[var(--cream)] shadow-2xl ring-1 ring-[var(--cream)]/10 transition hover:scale-105 hover:bg-[var(--roast)]"
+      >
+        <InstagramIcon className="h-5 w-5 transition group-hover:rotate-12" />
+        <span className="hidden sm:inline">@hate_coffee_01</span>
+      </a>
+
       {/* NAV */}
       <header className="absolute top-0 left-0 right-0 z-20">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-12">
@@ -85,17 +122,35 @@ function Index() {
             Hate<span className="opacity-60">.</span>Coffee
           </a>
           <nav className="hidden gap-8 text-sm font-medium text-[var(--cream)]/80 md:flex">
-            <a href="#menu" className="hover:text-[var(--cream)]">Меню</a>
-            <a href="#about" className="hover:text-[var(--cream)]">О нас</a>
-            <a href="#reviews" className="hover:text-[var(--cream)]">Отзывы</a>
-            <a href="#visit" className="hover:text-[var(--cream)]">Контакты</a>
+            {[
+              { href: "#menu", label: "Меню" },
+              { href: "#about", label: "О нас" },
+              { href: "#reviews", label: "Отзывы" },
+              { href: "#visit", label: "Контакты" },
+            ].map((l) => (
+              <a key={l.href} href={l.href} className="group relative hover:text-[var(--cream)]">
+                {l.label}
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-[var(--cream)] transition-all duration-500 group-hover:w-full" />
+              </a>
+            ))}
           </nav>
-          <a
-            href="#visit"
-            className="hidden rounded-full border border-[var(--cream)]/30 px-4 py-2 text-sm text-[var(--cream)] transition hover:bg-[var(--cream)] hover:text-[var(--espresso)] md:inline-block"
-          >
-            068 280 29 94
-          </a>
+          <div className="hidden items-center gap-3 md:flex">
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="rounded-full border border-[var(--cream)]/30 p-2 text-[var(--cream)] transition hover:bg-[var(--cream)] hover:text-[var(--espresso)]"
+            >
+              <InstagramIcon className="h-4 w-4" />
+            </a>
+            <a
+              href="tel:+380682802994"
+              className="rounded-full border border-[var(--cream)]/30 px-4 py-2 text-sm text-[var(--cream)] transition hover:bg-[var(--cream)] hover:text-[var(--espresso)]"
+            >
+              068 280 29 94
+            </a>
+          </div>
         </div>
       </header>
 
@@ -119,33 +174,41 @@ function Index() {
             <span className="steam ml-3" style={{ animationDelay: "1.2s" }} />
             <span className="steam ml-6" style={{ animationDelay: "2.4s" }} />
           </div>
+          {/* Rotating stamp */}
+          <div className="pointer-events-none absolute right-8 top-28 hidden lg:block">
+            <svg viewBox="0 0 200 200" className="spin-slow h-32 w-32 text-[var(--cream)]/70">
+              <defs>
+                <path id="circle" d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0" />
+              </defs>
+              <text fill="currentColor" fontSize="13" letterSpacing="4">
+                <textPath href="#circle">SPECIALTY · ODESA · SINCE 2020 · </textPath>
+              </text>
+              <circle cx="100" cy="100" r="6" fill="currentColor" />
+            </svg>
+          </div>
         </div>
 
         <div className="relative mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-6 pb-20 pt-32 lg:px-12">
           <div className="max-w-2xl">
             <Reveal variant="up" className="mb-6">
               <div className="inline-flex items-center gap-2 rounded-full border border-[var(--cream)]/20 bg-[var(--cream)]/5 px-3 py-1 text-xs uppercase tracking-[0.2em] backdrop-blur">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--cream)]" /> Одеса · Молдаванка
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" /> Одеса · Приморский район
               </div>
             </Reveal>
-            <Reveal variant="blur" delay={120}>
-              <h1 className="font-display text-[clamp(3.5rem,11vw,9rem)] font-semibold leading-[0.9] tracking-tighter">
-                Hate<br />Coffee<span className="text-[var(--cream)]/40">.</span>
-              </h1>
-            </Reveal>
+            <h1 className="font-display text-[clamp(3.5rem,11vw,9rem)] font-semibold leading-[0.9] tracking-tighter">
+              <SplitText text="Hate" className="block" />
+              <SplitText text="Coffee." className="block" />
+            </h1>
             <Reveal variant="up" delay={350}>
               <p className="mt-8 max-w-md text-lg text-[var(--cream)]/80 md:text-xl">
-                Лучший кофе на Молдаванке. Имя звучит грубо — кофе звучит идеально.
+                Лучший кофе в Приморском районе. Имя звучит грубо — кофе звучит идеально.
               </p>
             </Reveal>
             <Reveal variant="up" delay={500} className="mt-10 flex flex-wrap items-center gap-4">
-              <a
-                href="#menu"
-                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-[var(--cream)] px-7 py-4 text-sm font-semibold text-[var(--espresso)] transition hover:scale-[1.03] hover:bg-white active:scale-100"
-              >
+              <MagneticButton href="#menu" className="shine group inline-flex items-center gap-3 rounded-full bg-[var(--cream)] px-7 py-4 text-sm font-semibold text-[var(--espresso)] hover:bg-white">
                 <span className="relative z-10">Посмотреть меню</span>
-                <span className="transition group-hover:translate-x-1">→</span>
-              </a>
+                <span className="relative z-10 transition group-hover:translate-x-1">→</span>
+              </MagneticButton>
               <a
                 href="#visit"
                 className="inline-flex items-center gap-2 px-2 py-4 text-sm font-medium text-[var(--cream)]/80 hover:text-[var(--cream)]"
@@ -185,6 +248,25 @@ function Index() {
         </div>
       </div>
 
+      {/* BIG STATS */}
+      <section className="relative overflow-hidden bg-[var(--sand)] py-20">
+        <div className="grain absolute inset-0" />
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-6 sm:grid-cols-3 lg:px-12">
+          {[
+            { n: 5, dec: 1, suf: " ★", label: "рейтинг Google" },
+            { n: 12000, dec: 0, suf: "+", label: "чашек в год" },
+            { n: 4, dec: 0, suf: " года", label: "на районе" },
+          ].map((s, i) => (
+            <Reveal key={i} variant="up" delay={i * 120} className="text-center">
+              <div className="font-display text-6xl font-semibold tracking-tight text-[var(--espresso)] md:text-7xl">
+                <CountUp to={s.n} decimals={s.dec} suffix={s.suf} />
+              </div>
+              <div className="mt-3 text-xs uppercase tracking-[0.25em] text-muted-foreground">{s.label}</div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* SOCIAL PROOF */}
       <section id="reviews" className="border-b border-border bg-background py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
@@ -194,7 +276,7 @@ function Index() {
               <h2 className="mt-4 font-display text-5xl font-semibold leading-tight md:text-6xl">
                 Любимое место района.
               </h2>
-              <div className="mt-10 rounded-2xl bg-[var(--espresso)] p-8 text-[var(--cream)] transition hover:-translate-y-1 hover:shadow-2xl">
+              <TiltCard className="mt-10 rounded-2xl bg-[var(--espresso)] p-8 text-[var(--cream)] shadow-xl">
                 <div className="font-display text-7xl font-semibold">
                   <CountUp to={5} decimals={1} />
                 </div>
@@ -202,7 +284,7 @@ function Index() {
                 <div className="mt-4 text-sm text-[var(--cream)]/70">
                   Средняя оценка по <CountUp to={23} /> проверенным отзывам в Google.
                 </div>
-              </div>
+              </TiltCard>
             </Reveal>
 
             <Reveal variant="stagger" className="grid gap-5 sm:grid-cols-2">
@@ -264,7 +346,7 @@ function Index() {
 
           <Reveal variant="stagger" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {menu.map((m) => (
-              <article key={m.name} className="group cursor-pointer">
+              <TiltCard key={m.name} max={6} className="group cursor-pointer">
                 <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-[var(--sand)]">
                   <img
                     src={m.img}
@@ -280,8 +362,27 @@ function Index() {
                   <span className="text-sm font-medium text-[var(--roast)]">{m.price}</span>
                 </div>
                 <p className="mt-1 text-sm text-muted-foreground">{m.desc}</p>
-              </article>
+              </TiltCard>
             ))}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* PULL QUOTE */}
+      <section className="relative overflow-hidden bg-[var(--sand)] py-28 lg:py-40">
+        <div className="grain absolute inset-0" />
+        <div className="relative mx-auto max-w-5xl px-6 text-center lg:px-12">
+          <Reveal variant="blur">
+            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Манифест</p>
+            <blockquote className="mt-8 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-[var(--espresso)] md:text-6xl lg:text-7xl">
+              Мы ненавидим плохой кофе.<br />
+              <span className="italic text-[var(--roast)]">Поэтому варим только лучший.</span>
+            </blockquote>
+            <div className="mt-10 inline-flex items-center gap-3 text-sm text-muted-foreground">
+              <span className="h-px w-12 bg-[var(--roast)]/40" />
+              Команда Hate Coffee
+              <span className="h-px w-12 bg-[var(--roast)]/40" />
+            </div>
           </Reveal>
         </div>
       </section>
@@ -325,6 +426,26 @@ function Index() {
                   </dd>
                 </div>
               </dl>
+
+              <div className="mt-10 flex flex-wrap gap-3">
+                <MagneticButton
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shine inline-flex items-center gap-2 rounded-full bg-[var(--cream)] px-5 py-3 text-sm font-semibold text-[var(--espresso)] hover:bg-white"
+                >
+                  <InstagramIcon className="h-4 w-4" />
+                  @hate_coffee_01
+                </MagneticButton>
+                <a
+                  href="https://maps.google.com/?q=Пішонівська+27+Одеса"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--cream)]/30 px-5 py-3 text-sm font-medium text-[var(--cream)] transition hover:bg-[var(--cream)]/10"
+                >
+                  Маршрут в Google Maps →
+                </a>
+              </div>
             </Reveal>
 
             <Reveal variant="zoom" className="relative min-h-[400px] overflow-hidden rounded-3xl border border-[var(--cream)]/10">
