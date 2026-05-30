@@ -5,11 +5,15 @@ export function MagneticButton({
   children,
   className = "",
   strength = 0.35,
+  target,
+  rel,
 }: {
   href: string;
   children: ReactNode;
   className?: string;
   strength?: number;
+  target?: string;
+  rel?: string;
 }) {
   const ref = useRef<HTMLAnchorElement>(null);
 
@@ -30,6 +34,8 @@ export function MagneticButton({
     <a
       ref={ref}
       href={href}
+      target={target}
+      rel={rel}
       onMouseMove={onMove}
       onMouseLeave={reset}
       className={`inline-block transition-transform duration-300 ease-out will-change-transform ${className}`}
